@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop":  true,
+    "jsx": "react",
+    "jsxFactory": "h"
+  },
+  "include" : [
+    "./src/**/*"
+  ],
+  "exclude" : [
+      "./test/**/*"
+  ]
+}
