@@ -1,11 +1,15 @@
 import { h, Fragment } from 'preact';
+import Header from './components/Header';
+import QuestionFormContainer from './components/containers/QuestionFormContainer';
+import Style from './components/Style';
 
 const App = () => {
   return (
-    <Fragment>
-      <h1>Preact X with TypeScript</h1>
-      <p>Fragment works!</p>
-    </Fragment>
+    <div id="wrapper">
+      <Style />
+      <Header />
+      <QuestionFormContainer />
+    </div>
   );
 };
 

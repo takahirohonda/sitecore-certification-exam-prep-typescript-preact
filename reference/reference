@@ -1,0 +1,19 @@
+# Preact X Installation
+
+> npm i preact@next
+
+### Redux 
+
+With Preact X, use react-redux instead of preact-redux
+
+> npm i react-redux redux redux-thunk styled-jsx-preact 
+
+preact/compat is moved to the core. No need to install preact-compat
+
+# Running fetch on moch integration test in node environment
+
+npm i --save-dev @types/isomorphic-fetch isomorphic-fetch
+
+Then, replace fetch with isomorphic-fetch in the test file
+import fetch from 'isomorphic-fetch';
+(<any>global).fetch = fetch;

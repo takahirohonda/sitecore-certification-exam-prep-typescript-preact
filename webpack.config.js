@@ -14,7 +14,11 @@ module.exports = (env, argv) => {
       filename: 'default.js'
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js']
+      extensions: ['.ts', '.tsx', '.js'],
+      alias: {
+        'react': 'preact/compat',
+        'react-dom': 'preact/compat',
+      }
     },
     devServer: {
       inline: true,
@@ -55,7 +59,7 @@ module.exports = (env, argv) => {
                 ident: 'postcss',
                 plugins: [
                   require('autoprefixer')({
-                    'browsers': ['ie>=10', '> 1%', 'last 2 versions']
+                    'browserlist': ['ie>=10', '> 1%', 'last 2 versions']
                   }),
                 ]
               }

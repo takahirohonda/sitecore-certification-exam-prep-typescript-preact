@@ -1,0 +1,1 @@
+export const DATA_ENDPOINT = 'https://mydatahack.github.io/data/sitecore-quiz/sitecore-quiz-data.json';
