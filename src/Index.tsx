@@ -1,4 +1,5 @@
 import { h, render} from 'preact';
+import { SC_QUIZ } from './constants/constantValues';
 import App from './App';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -18,5 +19,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById(`${SC_QUIZ}root`)
 );

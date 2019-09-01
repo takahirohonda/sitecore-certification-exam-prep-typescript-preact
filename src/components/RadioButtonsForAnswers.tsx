@@ -14,6 +14,7 @@ interface IRadioButtonForAnswersProps {
   feedback: string;
   onChangeHandler: (value: string) => void;
   currentAnswerSubmitted: boolean;
+  correctAnswer: string;
 }
 
 const RadioButtonForAnswers = ({
@@ -21,7 +22,8 @@ const RadioButtonForAnswers = ({
   currentAnswer,
   feedback,
   onChangeHandler,
-  currentAnswerSubmitted
+  currentAnswerSubmitted,
+  correctAnswer
 }: IRadioButtonForAnswersProps) => {
   return (
     <Fragment>
@@ -33,6 +35,9 @@ const RadioButtonForAnswers = ({
       }
       <div className={`${SC_QUIZ}choices-radio-container`}>
       {currentQuestionData.answerOptions.map((answerOption: IAnswerOption): JSX.Element => {
+        const radioLabelAnsweredClass = currentAnswerSubmitted
+        ? answerOption.id === correctAnswer ? `${SC_QUIZ}correct-answer` : `${SC_QUIZ}wrong-answer`
+        : '';
           return (
             <div className={`${SC_QUIZ}radio-button`}>
               <input
@@ -44,7 +49,10 @@ const RadioButtonForAnswers = ({
                 checked={currentAnswer === answerOption.id}
                 onChange={e => onChangeHandler((e.target as HTMLInputElement).value)}
               />
-              <label className={`${SC_QUIZ}radio-label`} htmlFor={answerOption.id}>
+              <label
+                className={`${SC_QUIZ}radio-label ${radioLabelAnsweredClass}`}
+                htmlFor={answerOption.id}
+              >
                 <div className={`${SC_QUIZ}radio-square-button`}><span style="opacity:0">Ans</span></div>
                 <div className={`${SC_QUIZ}radio-label-text`}>
                 {answerOption.option}

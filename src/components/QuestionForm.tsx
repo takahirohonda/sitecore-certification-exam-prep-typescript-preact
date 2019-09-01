@@ -169,6 +169,9 @@ class QuestionForm extends Component<QuestionFormProps> {
                 {currentQuestionData.question}
               </p>
             </div>
+            <div className={`${SC_QUIZ}quiz-counter-container`}>
+              <p className={`${SC_QUIZ}quiz-counter`}>{currentQuestionNumber + 1}/{totalQuestions}</p>
+            </div>
             <AnswerChoiceShell>
               <RadioButtonForAnswers
                 currentQuestionData={currentQuestionData}
@@ -176,6 +179,7 @@ class QuestionForm extends Component<QuestionFormProps> {
                 feedback={currentQuestionData.feedback}
                 onChangeHandler={onRadioChangeHandler}
                 currentAnswerSubmitted={currentAnswerSubmitted}
+                correctAnswer={currentQuestionData.correctAnswer}
               />
             </AnswerChoiceShell>
           </form>

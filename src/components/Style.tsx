@@ -3,7 +3,7 @@ import { SC_QUIZ } from '../constants/constantValues';
 
 const Style = () => (
   <style jsx>
-    {`@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    {`@import url('https://fonts.googleapis.com/css?family=Open+Sans|Chilanka&display=swap');
 
     .${SC_QUIZ}wrapper {
       font-family: 'Open Sans', sans-serif;
@@ -17,7 +17,22 @@ const Style = () => (
 
     .${SC_QUIZ}question-container {
       display: flex;
-      margin: 10px 10px;
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+
+    .${SC_QUIZ}quiz-counter {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 15px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .${SC_QUIZ}quiz-counter {
+      font-weight: bold;
+      font-size: 15px;
+      font-family: 'Chilanka', cursive;
     }
 
     .${SC_QUIZ}question-index {
@@ -223,8 +238,10 @@ const Style = () => (
     }
 
     .${SC_QUIZ}feedback-message {
-      font-size: 13px;
+      font-size: 14px;
       font-style: italic;
+      animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
+      transform-origin: left;
     }
 
     /* quiz form animation */
