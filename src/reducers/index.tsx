@@ -4,6 +4,28 @@ import { combineReducers } from 'redux';
 import { initialState } from './initialState';
 import { IQuestion, IAnsweredQuestion } from '../types/interfaces';
 
+export const quizStarted = (
+  state: boolean = initialState.quizStarted,
+  action: AppActions
+): boolean => {
+  switch(action.type) {
+    case C.UPDATE_QUIZ_STARTED:
+      return action.payload;
+  }
+  return state;
+};
+
+export const quizOption = (
+  state: string = initialState.quizOption,
+  action: AppActions
+): string => {
+  switch(action.type) {
+    case C.UPDATE_QUIZ_OPTION:
+      return action.payload;
+  }
+  return state;
+};
+
 export const questionList = (
   state: Array<IQuestion> = initialState.questionList,
   action: AppActions
@@ -111,7 +133,6 @@ export const totalQuestions = (
   return state;
 };
 
-
 export const randomiseQuestion = (
   state: boolean = initialState.randomiseQuestion,
   action: AppActions
@@ -168,6 +189,8 @@ export const quizCompleted = (
 };
 
 const appReducer = combineReducers({
+  quizStarted,
+  quizOption,
   questionList,
   answeredQuestionList,
   currentQuestionNumber,

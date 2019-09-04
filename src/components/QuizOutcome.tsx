@@ -4,7 +4,8 @@ import {
   PASSED_TEXT,
   NOT_PASSED_TEXT,
   YOUR_SCORE_TEXT,
-  START_AGAIN_BUTTON_TEXT
+  START_AGAIN_BUTTON_TEXT,
+  PASS_SCORE
 } from '../constants/constantValues';
 import { IAnsweredQuestion } from '../types/interfaces';
 import QuizButton from '../components/QuizButton';
@@ -20,7 +21,7 @@ const calculatePassRate = (answeredQuestionList: Array<IAnsweredQuestion>): numb
 };
 
 const getOutcomeMessage = (score: number): string => {
-  return score >= 90 ? PASSED_TEXT : NOT_PASSED_TEXT;
+  return score >= PASS_SCORE ? PASSED_TEXT : NOT_PASSED_TEXT;
 };
 
 const QuizOutcome = ({answeredQuestionList, onClickHandler}: IQuizOutcome) => {

@@ -1,6 +1,8 @@
 import { IStoreState } from '../types/interfaces';
 
 export const initialState: IStoreState = {
+  quizStarted: false,
+  quizOption: '',
   questionList: [],
   answeredQuestionList: [],
   currentQuestionNumber: 0,

@@ -1,4 +1,6 @@
 export interface IStoreState {
+  quizStarted: boolean;
+  quizOption: string;
   questionList: Array<IQuestion>;
   answeredQuestionList: Array<IAnsweredQuestion>;
   currentQuestionNumber: number;
@@ -13,6 +15,10 @@ export interface IStoreState {
   fetching: boolean;
   fetchingSuccess: boolean;
   quizCompleted: boolean;
+}
+
+export interface IQuizOptions {
+  answerOptions: any;
 }
 
 export interface IAnsweredQuestion {

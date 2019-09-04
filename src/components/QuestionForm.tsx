@@ -1,5 +1,5 @@
 import { h, Component, Fragment } from 'preact';
-import { IStoreState, IAnsweredQuestion } from '../types/interfaces';
+import { IStoreState, IAnsweredQuestion, IQuestion } from '../types/interfaces';
 import {
   SC_QUIZ,
   SUBMIT_BUTTON_TEXT,
@@ -12,9 +12,9 @@ import AnswerChoiceShell from '../components/AnswerChoiceShell';
 import RadioButtonForAnswers from '../components/RadioButtonsForAnswers';
 import QuizButton from '../components/QuizButton';
 import QuizOutcome from '../components/QuizOutcome';
-import { answeredQuestionList } from '../reducers';
+import QuizStartPageContainer from './containers/QuizStartPageContainer';
 
-interface QuestionFormProps {
+interface IQuestionFormProps {
   state: IStoreState;
   onfetchInitialQuestionList: () => void;
   onRadioChangeHandler: (value: string) => void;
@@ -29,54 +29,68 @@ interface QuestionFormProps {
   onStartAgain: () => void;
 }
 
-class QuestionForm extends Component<QuestionFormProps> {
+class QuestionForm extends Component<IQuestionFormProps> {
 
   componentDidMount() {
     this.props.onfetchInitialQuestionList();
   }
 
-  private checkAnswered(currentQuestionNumber) {
-    console.log('checking checkAnswered function', this.props.state.answeredQuestionList.filter(list => list.id === currentQuestionNumber).length > 0);
+  private currentQuestionInAnsweredList(): boolean {
+    return (this.props.state.answeredQuestionList
+      .filter(list => list.id === this.getQuestionId(this.props.state.currentQuestionNumber))
+      .length) > 0;
+  }
+
+  private nextQuestionInAnsweredList(): boolean {
+    return (this.props.state.answeredQuestionList
+      .filter(list => list.id === this.getQuestionId(this.props.state.currentQuestionNumber + 1)))
+      .length > 0;
+  }
+
+  private getQuestionId(index: number): number {
+    return this.props.state.questionOrder[index];
+  }
+
+  private getCurrentQuestionId(): number {
+    return this.props.state.questionOrder[this.props.state.currentQuestionNumber];
+  }
+
+  private getCurrentAnsweredQuestion(): IAnsweredQuestion {
     return this.props.state.answeredQuestionList
-      .filter(list => list.id === currentQuestionNumber).length > 0
-      ? true : false;
+      .filter(list => list.id === this.getCurrentQuestionId())[0];
   }
 
-  private getCurrentQuestionData() {
-    const {
-      questionList,
-      answeredQuestionList,
-      questionOrder,
-      currentQuestionNumber
-    } = this.props.state;
-
-    return this.checkAnswered(currentQuestionNumber)
-      ? answeredQuestionList[questionOrder[currentQuestionNumber]]
-      : questionList[questionOrder[currentQuestionNumber]];
+  private getPreviousAnsweredQuestion(): IAnsweredQuestion {
+    return this.props.state.answeredQuestionList
+      .filter(list => list.id === this.getQuestionId(this.props.state.currentQuestionNumber -1))[0];
   }
 
-  private submitQuiz() {
-    const {
-      questionList,
-      answeredQuestionList,
-      currentAnswer,
-      currentQuestionNumber,
-      questionOrder
-    } = this.props.state;
 
+  private getCurrentQuestionFromList(): IQuestion {
+    return this.props.state.questionList
+      .filter(list => list.id === this.getCurrentQuestionId())[0];
+  }
+
+  private getCurrentQuestionData(): IQuestion | IAnsweredQuestion {
+    return this.currentQuestionInAnsweredList()
+      ? this.getCurrentAnsweredQuestion()
+      : this.getCurrentQuestionFromList();
+  }
+
+  private submitQuiz(): void {
     const {
       onAnsweredQuestionToList,
       onUpdateAnsweredQuestionToList,
       onUpdateCurrentAnswerSubmitted
     } = this.props;
 
-    const currentQuestionData = questionList[questionOrder[currentQuestionNumber]];
+    const currentQuestionData = this.getCurrentQuestionFromList();
     const correctAnswer = currentQuestionData.correctAnswer;
-    const correct = correctAnswer === currentAnswer ? true : false;
-    currentQuestionData['selecteddAnswer'] = currentAnswer;
+    const correct = correctAnswer === this.props.state.currentAnswer ? true : false;
+    currentQuestionData['selecteddAnswer'] = this.props.state.currentAnswer;
     currentQuestionData['correct'] = correct;
 
-    if (answeredQuestionList.filter(list => list.id === currentQuestionNumber)) {
+    if (this.currentQuestionInAnsweredList()) {
       onUpdateAnsweredQuestionToList(currentQuestionData as IAnsweredQuestion);
       onUpdateCurrentAnswerSubmitted(true);
     } else {
@@ -85,7 +99,7 @@ class QuestionForm extends Component<QuestionFormProps> {
     }
   }
 
-  private nextButtonClickHandler() {
+  private nextButtonClickHandler(): void {
     const {
       currentQuestionNumber,
       progressCounter,
@@ -105,33 +119,33 @@ class QuestionForm extends Component<QuestionFormProps> {
       onUpdateCurrentAnswerSubmitted(false);
       onClearCurrentAnswer();
     } else if (currentAnswerSubmitted && progressCounter > currentQuestionNumber) {
-      onUpdateCurrentQuestionNumber(currentQuestionNumber + 1);
-      if (!this.checkAnswered(currentQuestionNumber + 1)) {
+      if (!this.nextQuestionInAnsweredList()) {
         onUpdateCurrentAnswerSubmitted(false);
         onClearCurrentAnswer();
       }
+      onUpdateCurrentQuestionNumber(currentQuestionNumber + 1);
     }
   }
 
   private previousButtonClickHandler() {
-    const {
-      currentQuestionNumber,
-      answeredQuestionList,
-      questionOrder
-    } = this.props.state;
+    const { currentQuestionNumber } = this.props.state;
 
     const {
       onUpdateCurrentQuestionNumber,
       onRadioChangeHandler,
       onUpdateCurrentAnswerSubmitted,
     } = this.props;
-    onRadioChangeHandler(answeredQuestionList[questionOrder[currentQuestionNumber - 1]].selecteddAnswer);
+
+    const answeredQuestion = this.getPreviousAnsweredQuestion();
+    onRadioChangeHandler(answeredQuestion.selecteddAnswer);
     onUpdateCurrentQuestionNumber(currentQuestionNumber - 1);
     onUpdateCurrentAnswerSubmitted(true);
   }
 
   render() {
     const {
+      quizStarted,
+      questionList,
       answeredQuestionList,
       currentQuestionNumber,
       progressCounter,
@@ -154,13 +168,16 @@ class QuestionForm extends Component<QuestionFormProps> {
       onStartAgain
     } = this.props;
 
-    const lastPage = totalQuestions - 1 === currentQuestionNumber;
+    const lastPage = totalQuestions -1 === currentQuestionNumber;
 
     const currentQuestionData = this.getCurrentQuestionData();
 
     return (
       <Fragment>
-      {fetchingSuccess && !quizCompleted &&
+      {fetchingSuccess && !quizCompleted && !quizStarted &&
+        <QuizStartPageContainer />
+      }
+      {fetchingSuccess && !quizCompleted && quizStarted &&
         <Fragment>
           <form className={`${SC_QUIZ}quiz-form`}>
             <div className={`${SC_QUIZ}question-container`}>
@@ -205,7 +222,7 @@ class QuestionForm extends Component<QuestionFormProps> {
             <div className="${SC_QUIZ}btn-container-right">
               <QuizButton
                 className={`${SC_QUIZ}btn-control ${SC_QUIZ}btn-direction ${SC_QUIZ}btn-previous`}
-                disabled={progressCounter === 0 ? true: false}
+                disabled={currentQuestionNumber === 0 ? true: false}
                 buttonText={PREVIOUS_BUTTON_TEXT}
                 onClickHandler={() => this.previousButtonClickHandler()}
               />
@@ -222,7 +239,7 @@ class QuestionForm extends Component<QuestionFormProps> {
                   className={`${SC_QUIZ}btn-control ${SC_QUIZ}btn-confirm`}
                   disabled={!currentAnswerSubmitted ? true: false}
                   buttonText={COMPLETE_QUIZ_BUTTON_TEXT}
-                  onClickHandler={() => {onUpdateQuizCompleted();console.log('updatedQUizcompleted');}}
+                  onClickHandler={() => {onUpdateQuizCompleted();}}
                 />
               }
             </div>
@@ -230,7 +247,7 @@ class QuestionForm extends Component<QuestionFormProps> {
         </Fragment>
       }
       {
-        quizCompleted &&
+        quizCompleted && quizStarted &&
         <QuizOutcome
           answeredQuestionList={answeredQuestionList}
           onClickHandler={() => onStartAgain()}

@@ -48,9 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   }
 });
 
-const QuestionFormContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(QuestionForm);
-
-export default QuestionFormContainer;

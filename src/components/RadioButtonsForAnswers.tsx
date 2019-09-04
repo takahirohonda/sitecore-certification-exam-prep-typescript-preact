@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { SC_QUIZ } from '../constants/constantValues';
 import {
-  IAnswerOptions,
+  IQuizOptions,
   IAnswerOption,
   IQuestion,
   IAnsweredQuestion
@@ -9,7 +9,7 @@ import {
 import AnswerResultMessage from '../components/AnswerResultMessage';
 
 interface IRadioButtonForAnswersProps {
-  currentQuestionData: IQuestion | IAnsweredQuestion;
+  currentQuestionData: IQuestion | IAnsweredQuestion | IQuizOptions;
   currentAnswer: string;
   feedback: string;
   onChangeHandler: (value: string) => void;

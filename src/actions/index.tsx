@@ -3,6 +3,16 @@ import { IQuestion, IAnsweredQuestion } from '../types/interfaces';
 import { Dispatch } from 'redux';
 import { getData } from '../utils/loadInitialData';
 
+interface IUpdateQuizStarted {
+  type: C.UPDATE_QUIZ_STARTED;
+  payload: boolean;
+}
+
+interface IUpdateQuizOption {
+  type: C.UPDATE_QUIZ_OPTION;
+  payload: string;
+}
+
 interface ILoadQuestionList {
   type: C.LOAD_QUESTION_LIST;
   payload: Array<IQuestion>;
@@ -89,7 +99,9 @@ interface IStartAgain {
 }
 
 export type AppActions =
-ILoadQuestionList
+IUpdateQuizStarted
+| IUpdateQuizOption
+| ILoadQuestionList
 | IAddAnsweredQuestionToList
 | IUpdateAnsweredQuestionToList
 | IDeleteAnsweredQuestionFromList
@@ -106,6 +118,22 @@ ILoadQuestionList
 | IUpdateFetchingSuccess
 | IUpdateQuizCompleted
 | IStartAgain;
+
+export const updateQuizStarted = (quizStarted: boolean)
+: IUpdateQuizStarted => (
+  {
+    type: C.UPDATE_QUIZ_STARTED,
+    payload: quizStarted
+  }
+);
+
+export const updateQuizOption = (quizOption: string)
+: IUpdateQuizOption => (
+  {
+    type: C.UPDATE_QUIZ_OPTION,
+    payload: quizOption
+  }
+);
 
 export const loadQuestionList = (questionList: Array<IQuestion>)
 : ILoadQuestionList => (

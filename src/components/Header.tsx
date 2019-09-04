@@ -4,7 +4,7 @@ import { SC_QUIZ } from '../constants/constantValues';
 
 const Header = () => {
   return (
-    <h1 class={`${SC_QUIZ}quiz-title`}>{QUIZ_TITLE} </h1>
+    <h3 class={`${SC_QUIZ}quiz-title`}>{QUIZ_TITLE} </h3>
   );
 };
 
