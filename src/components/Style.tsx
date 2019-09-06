@@ -186,17 +186,11 @@ const Style = () => (
     }
 
     .${SC_QUIZ}correct-answer {
-      border: 0px solid #0075b4;
-      animation: ${SC_QUIZ}fadeInAnswerBorders 0.3s linear;
-      animation-fill-mode: forwards;
-      animation-delay: 0.2s;
+      border: 1px solid #0075b4;
     }
 
     .${SC_QUIZ}wrong-answer {
-      border: 0px solid #b20610;
-      animation: ${SC_QUIZ}fadeInAnswerBorders 0.3s linear;
-      animation-fill-mode: forwards;
-      animation-delay: 0.2s;
+      border: 1px solid #b20610;
     }
 
     .${SC_QUIZ}wrong-answer > .${SC_QUIZ}radio-square-button {
@@ -211,7 +205,8 @@ const Style = () => (
       position: relative;
       color: #0075b4;
       font-weight: bold;
-      animation: ${SC_QUIZ}fadeInMessages 0.3s cubic-bezier(.65,.12,.9,.6);
+      animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
+      transform-origin: left;
     }
 
     .${SC_QUIZ}correct-msg:after {
@@ -219,14 +214,16 @@ const Style = () => (
       position: absolute;
       font-size: 18px;
       left: 68px;
-      animation: ${SC_QUIZ}fadeInMessages 0.3s cubic-bezier(.65,.12,.9,.6);
+      animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
+      transform-origin: left;
     }
 
     .${SC_QUIZ}incorrect-msg {
       position: relative;
       font-weight: bold;
       color: #b20610;
-      animation: ${SC_QUIZ}fadeInMessages 0.3s cubic-bezier(.65,.12,.9,.6);
+      animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
+      transform-origin: left;
     }
 
     .${SC_QUIZ}incorrect-msg:after {
@@ -234,7 +231,8 @@ const Style = () => (
       position: absolute;
       font-size: 18px;
       left: 83px;
-      animation: ${SC_QUIZ}fadeInMessages 0.3s cubic-bezier(.65,.12,.9,.6);
+      animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
+      transform-origin: left;
     }
 
     .${SC_QUIZ}feedback-message {

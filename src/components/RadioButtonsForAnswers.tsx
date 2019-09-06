@@ -45,6 +45,7 @@ const RadioButtonForAnswers = ({
                 className={`${SC_QUIZ}radio-input`}
                 id={answerOption.id}
                 name="answer"
+                disabled={currentAnswerSubmitted}
                 value={answerOption.id}
                 checked={currentAnswer === answerOption.id}
                 onChange={e => onChangeHandler((e.target as HTMLInputElement).value)}

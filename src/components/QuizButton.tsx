@@ -11,6 +11,7 @@ const QuizButton = ({
     <button
       type="buttom"
       className={disabled ? className + ' disabled' : className}
+      disabled={disabled}
       onClick={onClickHandler}
     >{buttonText}
     </button>
