@@ -186,10 +186,10 @@ class QuestionForm extends Component<IQuestionFormProps> {
                 {currentQuestionData.question}
               </p>
             </div>
-            <div className={`${SC_QUIZ}quiz-counter-container`}>
-              <p className={`${SC_QUIZ}quiz-counter`}>{currentQuestionNumber + 1}/{totalQuestions}</p>
-            </div>
-            <AnswerChoiceShell>
+            <AnswerChoiceShell
+            currentQuestionNumber={currentQuestionNumber}
+            totalQuestions={totalQuestions}
+            >
               <RadioButtonForAnswers
                 currentQuestionData={currentQuestionData}
                 currentAnswer={currentAnswer}

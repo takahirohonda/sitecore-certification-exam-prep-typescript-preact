@@ -4,12 +4,21 @@ import { SC_QUIZ } from '../constants/constantValues';
 
 interface IAnswerChoiceShellProps {
   children: JSX.Element;
+  currentQuestionNumber: number;
+  totalQuestions: number;
 }
 
-const AnswerChoiceShell = ({children} : IAnswerChoiceShellProps) => {
+const AnswerChoiceShell = ({
+  children,
+  currentQuestionNumber,
+  totalQuestions
+}  : IAnswerChoiceShellProps) => {
   return (
     <div className={`${SC_QUIZ}choices-container`}>
-      <p className={`${SC_QUIZ}choices-title`}><i>{ANSWER_CHOICE_HEADER}</i></p>
+       <div className={`${SC_QUIZ}quiz-counter-container`}>
+          <p className={`${SC_QUIZ}choices-title`}><i>{ANSWER_CHOICE_HEADER}</i></p>
+          <p className={`${SC_QUIZ}quiz-counter`}>{currentQuestionNumber + 1}/{totalQuestions}</p>
+        </div>
       {children}
     </div>
   );

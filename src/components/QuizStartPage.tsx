@@ -85,7 +85,7 @@ class QuizStartPage extends Component<IQuizStartPageProps> {
       <Fragment>
         <form className={`${SC_QUIZ}quiz-form`}>
           <div className={`${SC_QUIZ}question-container`}>
-            <p className={`${SC_QUIZ}question`}>{OPTION_HEADER}</p>
+            <p className={`${SC_QUIZ}quiz-option-text`}>{OPTION_HEADER}</p>
           </div>
           <div className={`${SC_QUIZ}choices-container`}>
           <RadioButtonsForAnswers
@@ -95,6 +95,7 @@ class QuizStartPage extends Component<IQuizStartPageProps> {
             onChangeHandler={onUpdateQuizOption}
             currentAnswerSubmitted={false}
             correctAnswer={''}
+            extraClassNameForChoiceLabelText={`${SC_QUIZ}start-page-label-text`}
           />
           </div>
         </form>

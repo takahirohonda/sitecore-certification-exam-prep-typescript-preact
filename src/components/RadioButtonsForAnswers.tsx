@@ -15,6 +15,7 @@ interface IRadioButtonForAnswersProps {
   onChangeHandler: (value: string) => void;
   currentAnswerSubmitted: boolean;
   correctAnswer: string;
+  extraClassNameForChoiceLabelText?: string;
 }
 
 const RadioButtonForAnswers = ({
@@ -23,7 +24,8 @@ const RadioButtonForAnswers = ({
   feedback,
   onChangeHandler,
   currentAnswerSubmitted,
-  correctAnswer
+  correctAnswer,
+  extraClassNameForChoiceLabelText
 }: IRadioButtonForAnswersProps) => {
   return (
     <Fragment>
@@ -55,7 +57,7 @@ const RadioButtonForAnswers = ({
                 htmlFor={answerOption.id}
               >
                 <div className={`${SC_QUIZ}radio-square-button`}><span style="opacity:0">Ans</span></div>
-                <div className={`${SC_QUIZ}radio-label-text`}>
+                <div className={`${SC_QUIZ}radio-label-text ${typeof extraClassNameForChoiceLabelText !== 'undefined' ? extraClassNameForChoiceLabelText: ''}`}>
                 {answerOption.option}
                 </div>
               </label>

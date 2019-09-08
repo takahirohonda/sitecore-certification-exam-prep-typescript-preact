@@ -3,27 +3,50 @@ import { SC_QUIZ } from '../constants/constantValues';
 
 const Style = () => (
   <style jsx>
-    {`@import url('https://fonts.googleapis.com/css?family=Open+Sans|Chilanka&display=swap');
+{`@import url('https://fonts.googleapis.com/css?family=Open+Sans|Chilanka|Special+Elite|Gloria+Hallelujah&display=swap');
 
     .${SC_QUIZ}wrapper {
       font-family: 'Open Sans', sans-serif;
-      font-size: 14px;
     }
+
+    .${SC_QUIZ}quiz-title-image{
+      margin-left: 0px;
+      margin-right: 15px;
+      width: 45px;
+    }
+
 
     .${SC_QUIZ}quiz-title{
       margin-top: 20px;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .${SC_QUIZ}quiz-option-text {
+      font-family: 'Gloria Hallelujah', cursive;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .${SC_QUIZ}start-page-label-text {
+      font-family: 'Special Elite', cursive;
+      font-size: 16px;
+    }
+
+    .${SC_QUIZ}radio-label-text {
+
     }
 
     .${SC_QUIZ}question-container {
       display: flex;
-      margin-top: 10px;
+      margin-top: 30px;
       margin-bottom: 0px;
     }
 
-    .${SC_QUIZ}quiz-counter {
+    .${SC_QUIZ}quiz-counter-container {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       margin-right: 15px;
       margin-top: 0px;
       margin-bottom: 0px;
@@ -247,6 +270,7 @@ const Style = () => (
     .${SC_QUIZ}quiz-form {
       animation: ${SC_QUIZ}growRight 0.25s cubic-bezier(.65,.12,.9,.6);
       transform-origin: left;
+      margin-left: 12px;
     }
 
     @keyframes ${SC_QUIZ}growRight {

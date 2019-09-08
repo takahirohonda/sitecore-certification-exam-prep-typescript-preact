@@ -2,7 +2,7 @@
 export const SC_QUIZ = 'sc-quiz-';
 
 // Content -quiz start page
-export const OPTION_HEADER = 'Options';
+export const OPTION_HEADER = 'Choose your own adventure';
 export const QUIZ_START_BUTTON = 'Start Quiz';
 export const SHORT_NUMBER = 10;
 export const MEDIUM_NUMBER = 20;
@@ -37,7 +37,7 @@ export const SUBMIT_BUTTON_TEXT = 'Submit';
 export const CLEAR_BUTTON_TEXT = 'Clear';
 export const PREVIOUS_BUTTON_TEXT = String.fromCharCode(8592) + ' Previous';
 export const NEXT_BUTTON_TEXT = 'Next' + String.fromCharCode(8594);
-export const COMPLETE_QUIZ_BUTTON_TEXT = 'Complete Quiz';
+export const COMPLETE_QUIZ_BUTTON_TEXT = 'Complete';
 
 // Content - quiz outcome
 export const PASSED_TEXT = 'Congratulations! You passed.';
