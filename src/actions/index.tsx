@@ -148,7 +148,7 @@ export const fetchInitialQuestionList = () => async(dispatch: Dispatch) => {
   try {
     const initialData = await getData();
     dispatch(updateFetching(false));
-    console.log(initialData);
+    // console.log(initialData);
     dispatch(loadQuestionList(initialData));
     dispatch(updateFetchingSuccess(true));
   } catch {

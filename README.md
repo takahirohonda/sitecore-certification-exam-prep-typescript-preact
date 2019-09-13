@@ -48,3 +48,9 @@ Then, replace fetch with isomorphic-fetch in the test file
 import fetch from 'isomorphic-fetch';
 (<any>global).fetch = fetch;
 ```
+
+## PWA Support
+
+### Generation manifest.json file and icons
+
+Used [Web App Manifest Generator](https://app-manifest.firebaseapp.com/). 

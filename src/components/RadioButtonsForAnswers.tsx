@@ -50,7 +50,11 @@ const RadioButtonForAnswers = ({
                 disabled={currentAnswerSubmitted}
                 value={answerOption.id}
                 checked={currentAnswer === answerOption.id}
-                onChange={e => onChangeHandler((e.target as HTMLInputElement).value)}
+                onChange={e => {
+                  onChangeHandler((e.target as HTMLInputElement).value);
+                  window.scrollTo(0,document.body.scrollHeight);
+                  }
+                }
               />
               <label
                 className={`${SC_QUIZ}radio-label ${radioLabelAnsweredClass}`}

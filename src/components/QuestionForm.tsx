@@ -97,6 +97,10 @@ class QuestionForm extends Component<IQuestionFormProps> {
       onAnsweredQuestionToList(currentQuestionData as IAnsweredQuestion);
       onUpdateCurrentAnswerSubmitted(true);
     }
+
+    setTimeout(() => {
+      window.scrollTo(0,document.body.scrollHeight);
+    }, 20);
   }
 
   private nextButtonClickHandler(): void {

@@ -15,12 +15,24 @@ const Style = () => (
       width: 45px;
     }
 
-
     .${SC_QUIZ}quiz-title{
       margin-top: 20px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .${SC_QUIZ}quiz-title-image{
+        margin-left: 0px;
+        margin-right: 15px;
+        width: 30px;
+      }
+
+      .${SC_QUIZ}quiz-title{
+        font-size: 18px;
+        font-weight: bold;
+      }
     }
 
     .${SC_QUIZ}quiz-option-text {

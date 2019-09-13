@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
     mode: argv.mode || 'development',
     entry: './src/Index.tsx',
     output: {
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, '../mydatahack.github.io/sitecore-exam-prep'),
       filename: 'default.js'
     },
     resolve: {
@@ -85,7 +85,9 @@ module.exports = (env, argv) => {
         filename: 'index.html'
       }),
       new CopyWebpackPlugin([
-        { from: 'public/img', to: 'img' }
+        { from: 'public/manifest.json', to: 'manifest.json' },
+        { from: 'public/img', to: 'img' },
+        { from: 'public/sw.js', to: 'sw.js'}
       ])
       // new UglifyJsPlugin()
     ]
