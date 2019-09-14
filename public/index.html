@@ -10,12 +10,20 @@
   <link rel="shortcut icon" type="image/png" href="https://mydatahack.github.io/static/img/sitecore-quiz/sitecore-favicon/favicon.ico" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
   <link rel="manifest" href="manifest.json">
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-7920242659710811",
+      enable_page_level_ads: true
+    });
+  </script>
   <script>
     if('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/sw.js')
-        .then(function() { console.log("Service Worker Registered"); });
+        .then(function() { 
+          // console.log("Service Worker Registered"); 
+        });
     }
     </script>
 </head>
