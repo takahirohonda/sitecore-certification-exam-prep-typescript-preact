@@ -42,7 +42,7 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
-    "postcss": "^7.0.17",
+    "postcss": "^7.0.36",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "sinon": "^7.3.2",
